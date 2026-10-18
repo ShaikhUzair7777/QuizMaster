@@ -1,0 +1,108 @@
+:root {
+    font-family: Inter, "Segoe UI", Arial, sans-serif;
+    color: #172033;
+    background: #f5f7fc;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+a { color: inherit; text-decoration: none; }
+.auth-layout { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+.auth-intro {
+    padding: 42px clamp(28px, 6vw, 88px);
+    background: linear-gradient(145deg, #111b3a, #273b78 65%, #4564b2);
+    color: white; display: flex; flex-direction: column; justify-content: space-between;
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 750; }
+.brand-icon {
+    display: grid; place-items: center; width: 42px; height: 42px;
+    border-radius: 13px; background: #8b9eff; color: #101a3b; font-size: 25px;
+}
+.intro-content { max-width: 510px; padding: 55px 0; }
+.eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: #647de0; }
+.auth-intro .eyebrow { color: #bdcaff; }
+.intro-content h1 { font-size: clamp(36px, 4vw, 58px); line-height: 1.1; letter-spacing: -1.7px; margin: 20px 0; }
+.intro-content p { color: #d2dbf5; line-height: 1.8; font-size: 16px; max-width: 430px; }
+.feature { display: flex; align-items: center; gap: 12px; margin-top: 21px; color: #edf0ff; }
+.feature span { display: grid; place-items: center; border: 1px solid #7085cb; color: #d7e0ff; border-radius: 50%; width: 25px; height: 25px; }
+.intro-footer { font-size: 13px; color: #c5d0f1; }
+.auth-panel { display: grid; place-items: center; padding: 40px 24px; }
+.auth-card { width: 100%; max-width: 420px; }
+.auth-card h2 { font-size: 31px; letter-spacing: -0.8px; margin: 13px 0 8px; }
+.subtext { margin: 0 0 30px; color: #788196; font-size: 14px; }
+form { display: flex; flex-direction: column; }
+label { font-size: 13px; font-weight: 700; margin: 17px 0 8px; }
+input {
+    width: 100%; border: 1px solid #dce1eb; border-radius: 10px;
+    padding: 14px 15px; font-size: 14px; background: white; outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+input:focus { border-color: #536fe0; box-shadow: 0 0 0 3px #536fe01c; }
+button {
+    margin-top: 25px; padding: 15px; border: 0; border-radius: 10px;
+    background: #405ed0; color: white; font-size: 15px; font-weight: 750;
+    cursor: pointer; box-shadow: 0 7px 18px #405ed026;
+}
+button:hover { background: #304dbb; }
+button span { float: right; font-size: 19px; margin-top: -3px; }
+.switch-auth { text-align: center; font-size: 13px; color: #707b90; margin-top: 25px; }
+.switch-auth a { color: #405ed0; font-weight: 750; }
+.back-home { display: block; text-align: center; font-size: 13px; color: #7c8597; margin-top: 30px; }
+.mobile-brand { display: none; }
+@media (max-width: 800px) {
+    .auth-layout { grid-template-columns: 1fr; }
+    .auth-intro { display: none; }
+    .auth-panel { min-height: 100vh; padding: 30px 22px; }
+    .mobile-brand { display: block; font-size: 24px; font-weight: 850; color: #405ed0; margin-bottom: 38px; }
+    .mobile-brand span { color: #172033; font-size: 20px; }
+}
+
+.form-error {
+    padding: 12px 14px;
+    border: 1px solid #f1c4c4;
+    border-radius: 9px;
+    background: #fff1f1;
+    color: #a72f2f;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+.form-success {
+    padding: 12px 14px;
+    border: 1px solid #b8e4c7;
+    border-radius: 9px;
+    background: #effbf3;
+    color: #17683a;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+.input-wrap {
+    position: relative;
+    width: 100%;
+}
+.input-wrap input {
+    padding-right: 44px;
+}
+.input-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #8b96a5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    margin: 0;
+    box-shadow: none;
+}
+.input-eye:hover {
+    color: #405ed0;
+    background: none;
+}
+
