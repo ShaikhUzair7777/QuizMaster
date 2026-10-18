@@ -22,7 +22,7 @@ RUN apt-get update \
     && mkdir -p "${CATALINA_HOME}" \
     && tar -xzf /tmp/tomcat.tar.gz --strip-components=1 -C "${CATALINA_HOME}" \
     && rm -f /tmp/tomcat.tar.gz \
-    && apt-get purge -y --auto-remove curl tar \
+    && apt-get purge -y --auto-remove curl \
     && rm -rf /var/lib/apt/lists/* \
     && useradd --system --home-dir "${CATALINA_HOME}" --shell /usr/sbin/nologin quizmaster \
     && chown -R quizmaster:quizmaster "${CATALINA_HOME}"
