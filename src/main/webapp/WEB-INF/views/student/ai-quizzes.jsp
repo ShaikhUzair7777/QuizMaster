@@ -103,15 +103,15 @@
         <div id="material-fields" hidden>
         <div class="form-group" style="margin-top: 18px;">
             <label class="form-label" for="studyNotes">Paste study notes <span class="c-muted">(optional if a file is uploaded)</span></label>
-            <textarea class="form-input" id="studyNotes" name="studyNotes" rows="6" maxlength="20000"
+            <textarea class="form-input" id="studyNotes" name="studyNotes" rows="6" maxlength="300000"
                       placeholder="Paste notes, course material, or a passage to use as the source."></textarea>
-            <span class="form-hint">Up to 20,000 characters. Material mode requires notes or a readable file.</span>
+            <span class="form-hint">Up to 300,000 characters. Material mode requires notes or a readable file.</span>
         </div>
         <div class="form-group" style="margin-top: 18px;">
             <label class="form-label" for="sourceFile">Study notes <span class="c-muted">(optional)</span></label>
             <input class="form-input" id="sourceFile" name="sourceFile" type="file"
                    accept=".txt,.md,.csv,.pdf,text/plain,text/markdown,text/csv,application/pdf">
-            <span class="form-hint">UTF-8 text, Markdown, or CSV up to 100 KB; text-based PDF up to 5 MB. Extracted text is limited to 20,000 characters. Scanned PDFs require OCR and are not supported. Files are processed temporarily, not saved; extracted text is sent to Gemini, so upload only material you are allowed to share.</span>
+            <span class="form-hint">UTF-8 text or Markdown up to 100 KB; CSV up to 200 KB; text-based PDF up to 10 MB. Pasted and extracted text is limited to 300,000 characters. Scanned PDFs require OCR and are not supported. Files are processed temporarily, not saved; extracted text is sent to Gemini, so upload only material you are allowed to share.</span>
         </div>
         </div>
         <div class="flex items-center gap-3" style="margin-top: 24px; flex-wrap: wrap;">

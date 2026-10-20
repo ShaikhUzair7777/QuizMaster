@@ -13,8 +13,9 @@ import java.util.Set;
 /** Validates and extracts supported study material without persisting source files. */
 public final class SourceMaterialExtractor {
 
-    public static final int MAX_FILE_BYTES = 5 * 1024 * 1024;
+    public static final int MAX_FILE_BYTES = 10 * 1024 * 1024;
     private static final int MAX_TEXT_FILE_BYTES = 100 * 1024;
+    private static final int MAX_CSV_FILE_BYTES = 200 * 1024;
 
     private SourceMaterialExtractor() {}
 
@@ -24,7 +25,7 @@ public final class SourceMaterialExtractor {
             throw new IllegalArgumentException("Choose a valid source file.");
         }
         if (bytes.length > MAX_FILE_BYTES) {
-            throw new IllegalArgumentException("Source files must be no larger than 5 MB.");
+            throw new IllegalArgumentException("Source files must be no larger than 10 MB.");
         }
         String extension = fileName.substring(fileName.lastIndexOf('.') + 1)
                 .toLowerCase(Locale.ROOT);
@@ -54,11 +55,14 @@ public final class SourceMaterialExtractor {
             }
         }
 
+        int maxTextFileBytes = "csv".equals(extension)
+                ? MAX_CSV_FILE_BYTES : MAX_TEXT_FILE_BYTES;
         if (!Set.of("txt", "md", "csv").contains(extension)
-                || bytes.length > MAX_TEXT_FILE_BYTES
+                || bytes.length > maxTextFileBytes
                 || !Set.of("text/plain", "text/markdown", "text/csv").contains(mimeType)) {
             throw new IllegalArgumentException(
-                    "Upload a text, Markdown, CSV, or PDF file (up to 5 MB).");
+                    "Upload a text or Markdown file up to 100 KB, a CSV file up to 200 KB, "
+                            + "or a PDF file up to 10 MB.");
         }
         try {
             String text = StandardCharsets.UTF_8.newDecoder()

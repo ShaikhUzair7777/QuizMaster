@@ -112,6 +112,18 @@ class QuizGenerationServiceTest {
     }
 
     @Test
+    void acceptsStudyMaterialUpTo300000CharactersAndRejectsLongerText() {
+        String atLimit = "a".repeat(QuizGenerationService.MAX_SOURCE_LENGTH);
+        String overLimit = atLimit + "a";
+
+        assertDoesNotThrow(() -> QuizGenerationService.validateRequest(
+                "Study material", null, "Beginner", 1, atLimit));
+        assertThrows(IllegalArgumentException.class, () ->
+                QuizGenerationService.validateRequest(
+                        "Study material", null, "Beginner", 1, overLimit));
+    }
+
+    @Test
     void malformedJsonIsRejectedAndRetriedWithoutInventingAQuiz() {
         AtomicInteger calls = new AtomicInteger();
         QuizGenerationService service = new QuizGenerationService(prompt -> {

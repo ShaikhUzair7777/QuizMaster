@@ -11,5 +11,7 @@ esac
 
 sed -i "s/<Connector port=\"8080\"/<Connector port=\"${PORT}\"/" \
     "${CATALINA_HOME}/conf/server.xml"
+sed -i "s/<Connector port=\"${PORT}\"/<Connector port=\"${PORT}\" maxPostSize=\"14680064\"/" \
+    "${CATALINA_HOME}/conf/server.xml"
 
 exec "${CATALINA_HOME}/bin/catalina.sh" run

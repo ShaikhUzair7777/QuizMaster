@@ -23,7 +23,7 @@ import java.util.logging.Logger;
         "/student/ai-quizzes/save", "/student/ai-quizzes/preview",
         "/student/my-quizzes", "/student/my-quizzes/delete"
 })
-@MultipartConfig(maxFileSize = 5 * 1024 * 1024, maxRequestSize = 5_250_000,
+@MultipartConfig(maxFileSize = 10 * 1024 * 1024, maxRequestSize = 14 * 1024 * 1024,
         fileSizeThreshold = 256 * 1024)
 public class AiQuizServlet extends HttpServlet {
 
@@ -152,7 +152,7 @@ public class AiQuizServlet extends HttpServlet {
             res.getWriter().write(JsonResponse.error(ex.getMessage()));
         } catch (IllegalStateException ex) {
             res.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
-            res.getWriter().write(JsonResponse.error("Uploaded files must be no larger than 5 MB."));
+            res.getWriter().write(JsonResponse.error("Uploaded files must be no larger than 10 MB."));
         } catch (Exception ex) {
             LOG.warning("AI quiz generation failed.");
             getServletContext().log("AI quiz generation failed.", ex);
@@ -278,7 +278,7 @@ public class AiQuizServlet extends HttpServlet {
     private String extractSource(HttpServletRequest req) throws Exception {
         String notes = req.getParameter("studyNotes");
         if (notes != null && notes.length() > QuizGenerationService.MAX_SOURCE_LENGTH) {
-            throw new IllegalArgumentException("Study notes must be no longer than 20,000 characters.");
+            throw new IllegalArgumentException("Study notes must be no longer than 300,000 characters.");
         }
         String contentType = req.getContentType();
         String extractedFile = null;
@@ -305,7 +305,7 @@ public class AiQuizServlet extends HttpServlet {
                 : (extractedFile == null ? notes : notes + "\n\n" + extractedFile);
         if (combined.length() > QuizGenerationService.MAX_SOURCE_LENGTH) {
             throw new IllegalArgumentException(
-                    "Combined study notes are too long. Keep the extracted text under 20,000 characters.");
+                    "Combined study notes are too long. Keep the extracted text under 300,000 characters.");
         }
         return combined;
     }

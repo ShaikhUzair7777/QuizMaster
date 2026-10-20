@@ -12,7 +12,7 @@ public class QuizGenerationService {
 
     public static final int MIN_QUESTIONS = 1;
     public static final int MAX_QUESTIONS = 20;
-    public static final int MAX_SOURCE_LENGTH = 20_000;
+    public static final int MAX_SOURCE_LENGTH = 300_000;
     public static final int MAX_INSTRUCTIONS_LENGTH = 2_000;
 
     private final GeminiApi api;

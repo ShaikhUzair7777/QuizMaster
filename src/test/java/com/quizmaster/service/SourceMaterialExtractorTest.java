@@ -36,6 +36,17 @@ class SourceMaterialExtractorTest {
     }
 
     @Test
+    void permitsCsvFilesUpTo200KiBAndRejectsLargerFiles() {
+        byte[] atLimit = new byte[200 * 1024];
+        java.util.Arrays.fill(atLimit, (byte) 'a');
+
+        assertEquals(atLimit.length, SourceMaterialExtractor.extract(
+                "notes.csv", "text/csv", atLimit).length());
+        assertThrows(IllegalArgumentException.class, () -> SourceMaterialExtractor.extract(
+                "notes.csv", "text/csv", java.util.Arrays.copyOf(atLimit, atLimit.length + 1)));
+    }
+
+    @Test
     void extractsTextFromPdfAndRejectsFakePdf() throws Exception {
         byte[] pdf;
         try (PDDocument document = new PDDocument();
