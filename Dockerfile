@@ -29,9 +29,10 @@ RUN apt-get update \
 
 WORKDIR ${CATALINA_HOME}
 COPY --from=build --chown=quizmaster:quizmaster \
-    /workspace/target/quizmaster.war ${CATALINA_HOME}/webapps/quizmaster.war
+    /workspace/target/quizmaster.war ${CATALINA_HOME}/webapps/ROOT.war
 COPY --chown=quizmaster:quizmaster docker-entrypoint.sh /usr/local/bin/quizmaster-entrypoint
-RUN chmod 755 /usr/local/bin/quizmaster-entrypoint
+RUN rm -rf "${CATALINA_HOME}/webapps/ROOT" \
+    && chmod 755 /usr/local/bin/quizmaster-entrypoint
 
 EXPOSE 8080
 USER quizmaster

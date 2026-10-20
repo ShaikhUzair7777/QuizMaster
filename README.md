@@ -47,19 +47,19 @@ mvn test
 mvn clean package
 ```
 
-Deploy `target\quizmaster.war` to an Apache Tomcat 10.1 `webapps` directory. For example:
+Deploy `target\quizmaster.war` to an Apache Tomcat 10.1 `webapps` directory as `ROOT.war` to serve the app at the server root. For example:
 
 ```powershell
 $tomcatHome = "C:\path\to\apache-tomcat-10.1"
-Copy-Item .\target\quizmaster.war "$tomcatHome\webapps\quizmaster.war"
+Copy-Item .\target\quizmaster.war "$tomcatHome\webapps\ROOT.war"
 & "$tomcatHome\bin\catalina.bat" run
 ```
 
-The `run` command keeps Tomcat in the foreground; stop it with Ctrl+C. Ensure the server process can read the configured environment variables or a private `.env` file in its working or Tomcat configuration directory. The local app URL is `http://127.0.0.1:8080/quizmaster/`.
+The `run` command keeps Tomcat in the foreground; stop it with Ctrl+C. Ensure the server process can read the configured environment variables or a private `.env` file in its working or Tomcat configuration directory. The local app URL is `http://127.0.0.1:8080/`.
 
 ### Deploy to Render
 
-The repository includes a Dockerfile, Render Blueprint, and GitHub Actions Maven workflow. The Docker build runs the Java 25 test/package lifecycle, then runs the WAR on Tomcat 10.1.61 as a non-root user. The Tomcat connector is configured from Render's `PORT`; the health check uses `/quizmaster/login`.
+The repository includes a Dockerfile, Render Blueprint, and GitHub Actions Maven workflow. The Docker build runs the Java 25 test/package lifecycle, then runs the WAR at the Tomcat root on Tomcat 10.1.61 as a non-root user. The Tomcat connector is configured from Render's `PORT`; the health check uses `/login`.
 
 1. Push the repository to GitHub and create a new Blueprint instance in Render from `render.yaml` (or create a Docker Web Service for the repository).
 2. In Render, set `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and `GEMINI_API_KEY` as secret environment variables. Never add their values to GitHub or `render.yaml`.
